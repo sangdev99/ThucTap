@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="20dp"
+        android:background="#448AFF"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"/>
+            <TextView
+                android:textSize="20sp"
+                android:textColor="#434242"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select an Account"/>
+    </LinearLayout>
+
+    <TextView
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="0.3dp"
+        android:background="@drawable/single_line"/>
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/navURL"
+            android:paddingLeft="10dp"
+            android:background="@drawable/nav_option_background"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="192.168.1.10 admin demo "
+                android:textColor="#536DFE"
+                android:layout_gravity="center"/>
+        </RelativeLayout>
+
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="0.3dp"
+            android:background="@drawable/single_line"/>
+
+        <RelativeLayout
+            android:paddingLeft="10dp"
+            android:background="@drawable/nav_option_background"
+            android:id="@+id/navAdd"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Demo Xml parse"
+                android:id="@+id/tvAddAccount"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:paddingLeft="10dp"
+            android:background="@drawable/nav_option_background"
+            android:id="@+id/navRemove"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remove Account"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="0.3dp"
+        android:background="@drawable/single_line"/>
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:paddingLeft="10dp"
+            android:background="@drawable/nav_option_background"
+            android:id="@+id/navAbout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About Application"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>
