@@ -57,8 +57,13 @@ public class ScanActivity extends AppCompatActivity {
                 builder.setPositiveButton("Scan Again", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
-
+                        scanCode();
+                    }
+                });
+                builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
                     }
                 });
                 AlertDialog dialog = builder.create();
