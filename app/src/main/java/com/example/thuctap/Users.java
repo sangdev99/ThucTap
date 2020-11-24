@@ -1,44 +1,53 @@
 package com.example.thuctap;
 
-public class Users {
+import com.google.gson.annotations.SerializedName;
 
-    private String Active ;
-    private String DateLoggin ;
-    private String Password ;
+import java.io.Serializable;
+
+public class Users implements Serializable {
+
+    @SerializedName("CompanyID")
+    private int CompanyID ;
+    @SerializedName("PKID")
+    private String PKID ;
+    @SerializedName("Username")
     private String Username ;
+    @SerializedName("FirstName")
+    private String FirstName ;
+    @SerializedName("LastName")
+    private String LastName ;
+    @SerializedName("FullName")
+    private String FullName ;
+    @SerializedName("CompanyCD")
+    private String CompanyCD ;
+    @SerializedName("CompanyKey")
+    private String CompanyKey ;
 
-    public Users(String active, String dateLoggin, String password, String username) {
-        Active = active;
-        DateLoggin = dateLoggin;
-        Password = password;
+    public Users(int companyID, String PKID, String username, String firstName, String lastName, String fullName, String companyCD, String companyKey) {
+        CompanyID = companyID;
+        this.PKID = PKID;
         Username = username;
+        FirstName = firstName;
+        LastName = lastName;
+        FullName = fullName;
+        CompanyCD = companyCD;
+        CompanyKey = companyKey;
     }
 
-    public Users() {
+    public int getCompanyID() {
+        return CompanyID;
     }
 
-    public String getActive() {
-        return Active;
+    public void setCompanyID(int companyID) {
+        CompanyID = companyID;
     }
 
-    public void setActive(String active) {
-        Active = active;
+    public String getPKID() {
+        return PKID;
     }
 
-    public String getDateLoggin() {
-        return DateLoggin;
-    }
-
-    public void setDateLoggin(String dateLoggin) {
-        DateLoggin = dateLoggin;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
+    public void setPKID(String PKID) {
+        this.PKID = PKID;
     }
 
     public String getUsername() {
@@ -47,5 +56,45 @@ public class Users {
 
     public void setUsername(String username) {
         Username = username;
+    }
+
+    public String getFirstName() {
+        return FirstName;
+    }
+
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
+    public String getFullName() {
+        return FullName;
+    }
+
+    public void setFullName(String fullName) {
+        FullName = fullName;
+    }
+
+    public String getCompanyCD() {
+        return CompanyCD;
+    }
+
+    public void setCompanyCD(String companyCD) {
+        CompanyCD = companyCD;
+    }
+
+    public String getCompanyKey() {
+        return CompanyKey;
+    }
+
+    public void setCompanyKey(String companyKey) {
+        CompanyKey = companyKey;
     }
 }

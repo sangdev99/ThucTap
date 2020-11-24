@@ -1,5 +1,6 @@
 package com.example.thuctap;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -35,6 +37,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -48,6 +52,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -58,14 +63,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnLogin ;
     private String text = "";
 //    private View v;
-//    private Users users = null;
-//    ArrayList<Users> arrayListUser = new ArrayList<>();
+    private Users users ;
+    ArrayList<Users> arrayListUser = new ArrayList<>();
+    ArrayList<String> Listusername = new ArrayList<>();
 //    String  TAG = "vvv" ;
 
-
-
-
-
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,99 +149,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
     }
 
+    // checkLogin
     private void checkLogin() {
         mUsername = edtUserName.getText().toString() ;
         mPassword = edtPassWord.getText().toString() ;
-        if (mUsername.equals("demouser") == true && mPassword.equals("1234") == true) {
-            new RetrieveFeedTask().execute("");
-            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this,ScanActivity.class));
-        } else {
-            Toast.makeText(this, "Login Fail", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    // getDataJSon
-    class RetrieveFeedTask extends AsyncTask<String, Void, String> {
-
-        private Exception exception;
-
-        protected String doInBackground(String... urls) {
-            try {
-                URL url = new URL("http://171.244.141.28/Acumatica/GetLogin?userName=demouser&passWord=1234") ;
-                HttpURLConnection connection = null;
+        RequestQueue queue ;
+        queue = Volley.newRequestQueue(this);
+        // readJSON
+        StringRequest request = new StringRequest(Request.Method.GET, "http://171.244.141.28/Acumatica/Login?userName=demouser&passWord=1234", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("text",response) ;
                 try {
-                    connection = (HttpURLConnection)url.openConnection();
-                    connection.connect();
-                    int responsecode = connection.getResponseCode();
-                    if (responsecode != 200)
-                    {
-                        text = ("HTTP get error: " + responsecode);
-                    }
-                    else{
-                        Scanner scanner = new Scanner(url.openStream());
-                        while (scanner.hasNext())
-                        {
-                            text+=scanner.nextLine();
+                    JSONArray array = new JSONArray(response);
+                    for(int i=0;i<array.length();i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        String Username = object.getString("Username");
+                            Log.d("text",Username) ;
+                            Listusername.add(Username) ;
+                        if (((mUsername.equals("admin") == true)||(mUsername.equals(Username) == true)) && mPassword.equals("1234") == true) {
+                            Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this,ScanActivity.class));
+                        } else {
+                            Toast.makeText(MainActivity.this, "Login Fail", Toast.LENGTH_SHORT).show();
                         }
+
                     }
-                } catch (IOException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             }
-            Log.d("text",text) ;
-            return text;
-        }
-
-        protected void onPostExecute(String feed) {
-        }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error",error.toString());
+            }
+        });
+        queue.add(request);
     }
 }
-
-
-// xml to json
-          /*  try {
-                users = new Users();
-                try {
-                    URL url = new URL("http://171.244.141.28/Acumatica/GetLogin?userName=demouser&passWord=1234");
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                    conn.setDoOutput(true);
-                    conn.setRequestMethod("GET");
-                    conn.setRequestProperty("Content-Type", "application/json");
-                    conn.connect();
-                    int responsecode = conn.getResponseCode();
-
-                    if (responsecode != 200)
-                    {
-                        text = ("HTTP get error: " + responsecode);
-                    }
-                    else{
-                        Scanner scanner = new Scanner(url.openStream());
-                        while (scanner.hasNext())
-                        {
-                            text+=scanner.nextLine();
-                            Gson gson = new Gson();
-                            users = gson.fromJson(text, Users.class);
-//                            Log.d("aaa",users.getPassword()) ;
-                            mPassword = users.getPassword() ;
-
-                        }
-                    }
-                } catch (MalformedURLException e) {
-                    text = e.getLocalizedMessage();
-                } catch (IOException e) {
-                    text = e.getLocalizedMessage();
-                }
-                System.out.println(text);
-                return text;
-            } catch (Exception e) {
-                this.exception = e;
-                return null;
-            } finally {
-
-            }*/
 
 
 
